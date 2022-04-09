@@ -1,0 +1,192 @@
+Git 分布式管理代码
+
+工作区-->   暂存区  -->    本地库
+     git add   git commit    
+写代码     临时存储         历史版本
+
+
+历史版本不能删除，一定有记录！
+
+=========代码托管中心============
+又叫远程库， 一般从本地库推送到远程库（push）
+局域网： GitLab
+互联网： GitHub
+	Gitee（国内）
+
+=========Git 常用命令=============
+git config --global user.name "用户名"		设置用户签名
+git config --global user.email 邮箱		设置用户邮箱
+git 首次设置必须设置用户签名和邮箱，不然之后会报错
+
+git config --list 				查看一下设置的名字
+git init					初始化本地库
+git status					查看本地库状态
+git add <filename>				添加到暂存区
+git commit -m"日志信息" <filename>		提交到本地库
+git reflog					查看历史记录
+git reset --hard 版本号				版本穿梭
+
+=========初始化本地库=============
+新建一个文件夹当作本地库，然后在新建的文件夹中打开 Gitbash：
+git init	初始化本地库，会出现一个.git隐藏文件夹表示创建成功
+ll
+ll -a		查看
+ls		查看文件夹下的文件名称
+rm <filename>	删除文件
+clear 		清屏
+ctrl l		换页
+git status 	查看状态
+
+========用vim新增文件（hello.txt）========
+vim hello.txt	进入vim并创建hello.txt
+i	input
+strg+einfg	copy
+shift+einfg	paste
+esc 	退出vim
+yy	copy,只有在退出vim模式后才能用
+p	paste，只有在退出vim模式后才能用
+:wq	保存文件
+cat hello.txt 查看文件内容
+tail -n 1 hello.txt 	查看末尾行
+
+git status 	会发现现在出现了未被追踪的文件 hello.txt 红色的
+
+=========git add 添加到暂存区==========
+git add hello.txt
+git status			hello.txt 变成了绿色，放到了暂存区
+git rm --cached hello.txt 	rm 删除，从暂存区删除
+git status
+
+
+==========git commit 提交到本地库=======
+会生成历史版本，不能删除
+git commit -m "message" <filename>
+git status
+git reflog	查看提交历史，有前7位版本号
+git log 	查看详细提交信息,有用户签名和邮箱，以及完整版本号
+
+
+===============修改文件==================
+vim hello.txt	open hello.txt with vim
+i		input
+vim中可能会误触到ctrl S ，导致锁死
+这时候选哟ctrl Q， 即可解除锁死状态
+esc
+:wq		保存
+:q		强制退出不保存
+
+修改完文件之后跟之前一样，添加到暂存区，提交到本地库
+git add hello.txt
+git commit -m "second version" hello.txt
+cat hello.txt
+
+===============历史版本和版本穿梭=============
+底层就是移动了head指针
+git reflog		查看历史精简版
+git log			查看历史详细版
+git reset --hard <版本号> 穿梭到第几个版本
+复制ctrl einfg	粘贴 shift einfg
+
+
+===============git 分支操作==================
+可以同时并行做多种任务，然后做完之后再合并到一起
+各个分支互不影响
+分支操作:
+	git branch 分支名	创建分支
+	git branch -v		查看分支
+	git checkout 分支名	切换分支
+	git merge 分支名		把指定的分支合并到现在的分支上
+
+修改分支:	
+	git branch hot-fix
+	git branch -v
+	git checkout hot-fix
+	vim hello.txt
+	i
+		"edit from hot-fix"
+	esc
+	:wq
+	git add hello.txt
+	git commit hello.txt
+	cat hello.txt
+	这时候提交到的是hot-fix的本地库，这里面的hello.txt是变化了的
+	git checkout master
+	cat hello.txt
+	master分支里面的hello.txt是没有受到影响的
+
+把hot-fix 分支合并到master分支:
+	先换到master分支
+	git checkout master
+	再合并
+	git merge hot-fix
+
+
+============冲突和解决冲突=============
+当有人在hot-fix分支对同一个文件做了更改并提交
+又有人在master分支对同一个文件做了更改并提交
+这时如果想在master分支merge hot-fix分支，就会出现冲突，这时候需要人工解决冲突
+git status 查看状态
+vim hello.txt 进去:
+	<<<<<<< HEAD
+	master test
+	=======
+	hot-fix test
+	>>>>>>> hot-fix
+	
+	<<<<<<<<<<<<HEAD 
+	当前分支做的更改
+	=============
+	另一个分支做的更改
+	>>>>>>>>>>>> hot-fix
+直接在里面添加和删除后，保存即可:
+i
+	master test
+	hot-fix test
+:wq
+这个时候把人工改好的文件再进行 add 和commit
+git add hello.txt
+注意，之后的commit不能带文件名，只写个信息就可以了
+git commit -m "merge test"
+git status
+git reflog
+cat hello.txt
+合并成功！
+只修改了master分支，对hot-fix 分支是没有影响的!
+
+
+==========团队协作机制=============
+	需要用代码托管中心
+	     远程库
+ pull	push	 clone	 push
+   本地库	     本地库
+
+团队内协作 & 跨团队协作
+看图片
+
+
+==========GitHub 操作==============
+Repository name 最好和本地文件夹的名字一样
+选择Public
+Private不能超过5个人
+直接创建就好了
+https://github.com/yalezhang2021/Git-Tutorial-Windows.git
+
+==========创建远程库别名=============
+链接太长了，记不住，可以起一个别名，方便以后拉取和推送
+git remote -v		 	 查看现在有什么别名
+git remote add <别名> <链接>	 最好和库名字一致
+git remote add Git-Tutorial-Windows https://github.com/yalezhang2021/Git-Tutorial-Windows.git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
