@@ -176,9 +176,16 @@ https://github.com/yalezhang2021/Git-Tutorial-Windows.git
 git remote -v		 	 查看现在有什么别名
 git remote add <别名> <链接>	 最好和库名字一致
 git remote add Git-Tutorial-Windows https://github.com/yalezhang2021/Git-Tutorial-Windows.git
+这里会出现两个一样的别名，就是说push和pull，clone都可以用这个别名
 
 
+===========git push================
+推送时需要指定分支
+git checkout master
+git push <别名/链接> <分支名>
+git push Git-Tutorial-Windows master
 
+===========从远程库拉取到本地库==============
 
 
 
