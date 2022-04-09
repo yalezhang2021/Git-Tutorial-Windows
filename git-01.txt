@@ -175,7 +175,9 @@ https://github.com/yalezhang2021/Git-Tutorial-Windows.git
 链接太长了，记不住，可以起一个别名，方便以后拉取和推送
 git remote -v		 	 查看现在有什么别名
 git remote add <别名> <链接>	 最好和库名字一致
-git remote add Git-Tutorial-Windows https://github.com/yalezhang2021/Git-Tutorial-Windows.git
+git remote add Git-Tutorial-Windows 
+注意别名只存在于该账户下
+https://github.com/yalezhang2021/Git-Tutorial-Windows.git
 这里会出现两个一样的别名，就是说push和pull，clone都可以用这个别名
 
 
@@ -186,8 +188,30 @@ git push <别名/链接> <分支名>
 git push Git-Tutorial-Windows master
 
 ===========从远程库拉取到本地库==============
+git pull <别名/链接> <分支名>
+git pull Git-Tutorial-Windows master
 
+===========clone=====================
+对于不同的账户，在本地新建一个文件夹，比如Git-LHC,然后在里面打开git terminal
+git clone <链接>
+-克隆不需要登陆
+-若使用ssh克隆需要登陆，需要先创建ssh密钥
+-github可能不再支持密码，需要创建token，网上有方法
 
+===========团队内协作==================
+邀请oliver： 在github 设置界面，管理人员，邀请人，输入邮箱发送邀请链接
+在oliver这一端，收到邀请链接，登上github，接受邀请即可。
+
+现在由oliver在他的本地做改动并push到远程代码托管中心
+vim hello.txt
+i
+"by oliver"
+esc
+:wq
+
+git add hello.txt
+git commit -m "oliver first commit" hello.txt
+git push <链接> master
 
 
 
