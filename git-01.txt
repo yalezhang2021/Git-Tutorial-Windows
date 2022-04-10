@@ -212,9 +212,28 @@ esc
 git add hello.txt
 git commit -m "oliver first commit" hello.txt
 git push <链接> master
+github username: name
+github password: token
 
 
+推送成功后，yalezhang便可以拉取：
+git pull Git-Tutorial-Windows master
 
+
+===========跨团队协作===============
+了解一下尚硅谷bi站有讲，即可
+
+===========生成ssh=================
+ssh-keygen -t rsa -C 邮箱
+或
+ssh-keygen
+三次回车不用填写
+试试看哪个行，不同系统网上搜索
+然后找到.ssh文件夹
+id_rsa 私钥
+id_rsa.pub公钥，一般用公钥即可
+cat id_rsa.pub
+ctrl insert 复制
 
 
 
