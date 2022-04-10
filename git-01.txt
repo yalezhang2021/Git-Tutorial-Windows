@@ -224,6 +224,7 @@ git pull Git-Tutorial-Windows master
 了解一下尚硅谷bi站有讲，即可
 
 ===========生成ssh=================
+有了ssh之后就不需要反复输入密码了
 ssh-keygen -t rsa -C 邮箱
 或
 ssh-keygen
@@ -234,7 +235,20 @@ id_rsa 私钥
 id_rsa.pub公钥，一般用公钥即可
 cat id_rsa.pub
 ctrl insert 复制
+GitHub -- settings -- SSH and GPG keys --New SSH key
+-- paste
 
+=============IDEA集成Git=============
+这部分在bi站 尚硅谷有很好的视频
+主要适合java开发的同学
+我暂时用不上，先不看了
+
+
+=============GitLab=================
+官网上找到 install， 对系统有要求
+可以用ubuntu来装，若是windows系统的话需要虚拟机
+一般是当远程仓库来用
+按照官网上的指示来安装和使用即可。
 
 
 
